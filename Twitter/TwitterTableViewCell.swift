@@ -24,12 +24,27 @@ class TwitterTableViewCell: UITableViewCell {
     @IBOutlet weak var retweetButton: UIButton!
     
     @IBAction func like(_ sender: Any) {
+        let tobeLiked = !liked
+        
+        if (tobeLiked){
+            TwitterAPICaller.client?.likeTweet(tweetID: tweetID, success: {
+                self.setLikedTweet(true)
+            }, failure: {(error) in
+                print("Like did not succeed: \(error)")
+            })
+        } else {
+            TwitterAPICaller.client?.unlikeTweet(tweetID: tweetID, success: {self.setLikedTweet(false)}, failure: { (error) in
+                print("Unlike did not succeed: \(error)")
+            })
+        }
     }
 
     @IBAction func retweet(_ sender: Any) {
     }
     
     var liked : Bool = false
+    var tweetID : Int = -1
+
     
     func setLikedTweet(_ isLiked : Bool){
         liked = isLiked
@@ -38,6 +53,7 @@ class TwitterTableViewCell: UITableViewCell {
         } else {           likeButton.setImage(UIImage(named: "favor-icon"), for: UIControl.State.normal)
         }
     }
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()

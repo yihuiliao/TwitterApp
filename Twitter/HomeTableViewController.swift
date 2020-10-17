@@ -80,6 +80,7 @@ class HomeTableViewController: UITableViewController {
         }
         
         cell.setLikedTweet(tweetArray[indexPath.row]["favorited"] as! Bool)
+        cell.tweetID = tweetArray[indexPath.row]["id"] as! Int
         
         return cell
     }
