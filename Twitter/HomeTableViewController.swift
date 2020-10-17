@@ -79,7 +79,7 @@ class HomeTableViewController: UITableViewController {
             cell.profileImage.image = UIImage(data: imageData)
         }
         
-        
+        cell.setLikedTweet(tweetArray[indexPath.row]["favorited"] as! Bool)
         
         return cell
     }
