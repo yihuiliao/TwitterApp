@@ -13,17 +13,17 @@ class HomeTableViewController: UITableViewController {
     var tweetArray = [NSDictionary]()
     var numberofTweets: Int!
     
-    let myRefreshControl = UIRefreshControl()
+    let refresh = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         loadTweet()
         
-        myRefreshControl.addTarget(self, action: #selector(loadTweet), for: .valueChanged)
-        tableView.refreshControl = myRefreshControl
+        refresh.addTarget(self, action: #selector(loadTweet), for: .valueChanged)
+        tableView.refreshControl = refresh
         
-        // Uncomment the following line to preserve selection between presentations
+        // Uncomment the following line to preserve  selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
@@ -49,7 +49,7 @@ class HomeTableViewController: UITableViewController {
             }
             
             self.tableView.reloadData()
-            self.myRefreshControl.endRefreshing()
+            self.refresh.endRefreshing()
             
         }, failure: { (Error) in
             print("Could not retreive tweet")
